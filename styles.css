@@ -1,0 +1,311 @@
+/* ─────────────────────────────────────────────────────────
+   QA Dashboard — Styles
+   Colour palette: dark navy header, white body, semantic
+   colours for pass/fail/skip status indicators.
+───────────────────────────────────────────────────────── */
+
+/* ── Reset & base ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ───────────────────────────────────────────── */
+.header {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.header-sub {
+  font-size: 0.875rem;
+  color: #a0aec0;
+  margin-top: 0.25rem;
+}
+
+.header-meta {
+  font-size: 0.8rem;
+  color: #a0aec0;
+}
+
+/* ── Main container ───────────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Section headings ─────────────────────────────────── */
+h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+/* ── Summary cards ────────────────────────────────────── */
+.cards-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  border-top: 4px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.card-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #718096;
+  margin-bottom: 0.5rem;
+}
+
+.card-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+/* Card accent colours */
+.card--total   { border-top-color: #4a90e2; }
+.card--total   .card-value { color: #4a90e2; }
+
+.card--passed  { border-top-color: #48bb78; }
+.card--passed  .card-value { color: #48bb78; }
+
+.card--failed  { border-top-color: #f56565; }
+.card--failed  .card-value { color: #f56565; }
+
+.card--skipped { border-top-color: #ed8936; }
+.card--skipped .card-value { color: #ed8936; }
+
+.card--rate    { border-top-color: #805ad5; }
+.card--rate    .card-value { color: #805ad5; }
+
+/* ── Progress bar ─────────────────────────────────────── */
+.progress-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.progress-bar-track {
+  background: #e2e8f0;
+  border-radius: 999px;
+  height: 28px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #48bb78, #38a169);
+  width: 0%;                     /* Set by JS */
+  transition: width 0.8s ease;
+}
+
+.progress-bar-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2d3748;
+  pointer-events: none;
+}
+
+/* Change bar colour to red when pass rate is critically low */
+.progress-bar-fill.critical {
+  background: linear-gradient(90deg, #f56565, #c53030);
+}
+
+.legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: #718096;
+}
+
+.legend-item::before {
+  content: '■ ';
+  font-size: 0.9rem;
+}
+
+.legend-passed::before  { color: #48bb78; }
+.legend-failed::before  { color: #f56565; }
+.legend-skipped::before { color: #ed8936; }
+
+/* ── Stacked bar chart ────────────────────────────────── */
+.chart-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.chart-label {
+  font-weight: 500;
+  color: #4a5568;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chart-bar-track {
+  background: #e2e8f0;
+  border-radius: 6px;
+  height: 20px;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Each colour segment inside the stacked bar */
+.bar-passed  { background: #48bb78; }
+.bar-failed  { background: #f56565; }
+.bar-skipped { background: #ed8936; }
+
+/* ── Table ────────────────────────────────────────────── */
+.table-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+thead th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #718096;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+tbody tr {
+  border-bottom: 1px solid #f7fafc;
+  transition: background 0.1s ease;
+}
+
+tbody tr:hover {
+  background: #f7fafc;
+}
+
+tbody td {
+  padding: 0.7rem 0.75rem;
+  color: #2d3748;
+}
+
+/* Status badge */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge--passed  { background: #c6f6d5; color: #276749; }
+.badge--partial { background: #feebc8; color: #744210; }
+.badge--failed  { background: #fed7d7; color: #742a2a; }
+.badge--skipped { background: #e9d8fd; color: #553c9a; }
+
+/* ── Footer ───────────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 1.25rem;
+  font-size: 0.8rem;
+  color: #a0aec0;
+  background: #1a1a2e;
+}
+
+.footer code {
+  background: #2d3748;
+  color: #e2e8f0;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* ── Responsive tweaks ────────────────────────────────── */
+@media (max-width: 600px) {
+  .chart-row {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

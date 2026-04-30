@@ -1,0 +1,59 @@
+{
+  "lastUpdated": "2025-04-30T10:00:00Z",
+  "summary": {
+    "total": 87,
+    "passed": 74,
+    "failed": 8,
+    "skipped": 5
+  },
+  "suites": [
+    {
+      "name": "Login & Authentication",
+      "total": 15,
+      "passed": 14,
+      "failed": 1,
+      "skipped": 0,
+      "status": "partial"
+    },
+    {
+      "name": "User Registration",
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "status": "passed"
+    },
+    {
+      "name": "Product Search & Filters",
+      "total": 18,
+      "passed": 14,
+      "failed": 3,
+      "skipped": 1,
+      "status": "partial"
+    },
+    {
+      "name": "Shopping Cart",
+      "total": 16,
+      "passed": 13,
+      "failed": 2,
+      "skipped": 1,
+      "status": "partial"
+    },
+    {
+      "name": "Checkout & Payments",
+      "total": 14,
+      "passed": 12,
+      "failed": 1,
+      "skipped": 1,
+      "status": "partial"
+    },
+    {
+      "name": "User Profile & Settings",
+      "total": 12,
+      "passed": 9,
+      "failed": 1,
+      "skipped": 2,
+      "status": "partial"
+    }
+  ]
+}

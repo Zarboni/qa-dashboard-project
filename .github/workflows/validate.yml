@@ -1,0 +1,93 @@
+name: Validate Dashboard
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  validate:
+    name: Validate project files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Confirm required files exist ───────────────────
+      - name: Check required files exist
+        run: |
+          echo "Checking required project files..."
+          files=(
+            "index.html"
+            "styles.css"
+            "dashboard.js"
+            "data/test-results.json"
+            "README.md"
+            "docs/qa-metrics-explained.md"
+            "docs/sample-test-summary.md"
+          )
+          missing=0
+          for f in "${files[@]}"; do
+            if [ -f "$f" ]; then
+              echo "  ✓ $f"
+            else
+              echo "  ✗ MISSING: $f"
+              missing=1
+            fi
+          done
+          if [ $missing -eq 1 ]; then
+            echo "One or more required files are missing."
+            exit 1
+          fi
+          echo "All required files present."
+
+      # ── Validate JSON structure ────────────────────────
+      - name: Validate test-results.json
+        run: |
+          echo "Validating JSON syntax..."
+          python3 -c "
+          import json, sys
+
+          with open('data/test-results.json') as f:
+              data = json.load(f)
+
+          # Confirm top-level keys are present
+          required_keys = ['lastUpdated', 'summary', 'suites']
+          for key in required_keys:
+              assert key in data, f'Missing key: {key}'
+
+          # Confirm summary fields are numbers
+          summary = data['summary']
+          for field in ['total', 'passed', 'failed', 'skipped']:
+              assert isinstance(summary[field], int), f'summary.{field} must be an integer'
+
+          # Confirm pass + fail + skip adds up to total
+          calculated = summary['passed'] + summary['failed'] + summary['skipped']
+          assert calculated == summary['total'], (
+              f'Summary totals do not add up: {calculated} != {summary[\"total\"]}'
+          )
+
+          print('JSON is valid and summary totals are consistent.')
+          "
+
+      # ── Check HTML has expected element IDs ───────────
+      - name: Check HTML element IDs
+        run: |
+          echo "Checking HTML for required element IDs..."
+          ids=("total" "passed" "failed" "skipped" "pass-rate" "progress-bar-fill" "chart" "suite-table-body")
+          missing=0
+          for id in "${ids[@]}"; do
+            if grep -q "id=\"$id\"" index.html; then
+              echo "  ✓ id=\"$id\""
+            else
+              echo "  ✗ MISSING id=\"$id\""
+              missing=1
+            fi
+          done
+          if [ $missing -eq 1 ]; then
+            echo "One or more required HTML element IDs are missing."
+            exit 1
+          fi
+          echo "All required HTML element IDs present."

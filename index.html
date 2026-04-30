@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QA Test Results Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Header ───────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-inner">
+      <h1>QA Test Results Dashboard</h1>
+      <p class="header-sub">Live quality metrics for the current test run</p>
+    </div>
+    <div class="header-meta">
+      <span id="last-updated">Loading…</span>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ── Summary Cards ────────────────────────────────────── -->
+    <section class="cards-section" aria-label="Test summary">
+      <div class="card card--total">
+        <p class="card-label">Total Tests</p>
+        <p class="card-value" id="total">—</p>
+      </div>
+      <div class="card card--passed">
+        <p class="card-label">Passed</p>
+        <p class="card-value" id="passed">—</p>
+      </div>
+      <div class="card card--failed">
+        <p class="card-label">Failed</p>
+        <p class="card-value" id="failed">—</p>
+      </div>
+      <div class="card card--skipped">
+        <p class="card-label">Skipped</p>
+        <p class="card-value" id="skipped">—</p>
+      </div>
+      <div class="card card--rate">
+        <p class="card-label">Pass Rate</p>
+        <p class="card-value" id="pass-rate">—</p>
+      </div>
+    </section>
+
+    <!-- ── Pass Rate Progress Bar ────────────────────────────── -->
+    <section class="progress-section" aria-label="Pass rate progress bar">
+      <h2>Overall Pass Rate</h2>
+      <div class="progress-bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-wrapper">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        <span class="progress-bar-label" id="progress-bar-label">0%</span>
+      </div>
+      <!-- Legend showing what each colour means -->
+      <div class="legend">
+        <span class="legend-item legend-passed">Passed</span>
+        <span class="legend-item legend-failed">Failed</span>
+        <span class="legend-item legend-skipped">Skipped</span>
+      </div>
+    </section>
+
+    <!-- ── Stacked Bar Chart (per-suite breakdown) ───────────── -->
+    <section class="chart-section" aria-label="Test suites chart">
+      <h2>Results by Test Suite</h2>
+      <div class="chart" id="chart">
+        <!-- Bars are injected by dashboard.js -->
+      </div>
+    </section>
+
+    <!-- ── Test Suite Table ──────────────────────────────────── -->
+    <section class="table-section" aria-label="Test suite details">
+      <h2>Test Suite Breakdown</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Suite</th>
+              <th>Total</th>
+              <th>Passed</th>
+              <th>Failed</th>
+              <th>Skipped</th>
+              <th>Pass Rate</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="suite-table-body">
+            <!-- Rows injected by dashboard.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>QA Dashboard — Portfolio Project by Faiz &nbsp;|&nbsp; Data sourced from <code>data/test-results.json</code></p>
+  </footer>
+
+  <!-- Load the dashboard logic last so the DOM is ready -->
+  <script src="dashboard.js"></script>
+
+</body>
+</html>
