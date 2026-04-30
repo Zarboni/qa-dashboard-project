@@ -6,6 +6,9 @@ A lightweight, interactive dashboard that visualises automated test results and 
 
 ## Live Preview
 
+![QA Dashboard Screenshot](assets/dashboard-screenshot.png)
+
+
 > Open `index.html` via a local web server (see [Running Locally](#running-locally) below).
 
 ![Dashboard screenshot placeholder](docs/screenshot-placeholder.png)
