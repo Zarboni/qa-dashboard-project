@@ -155,4 +155,4 @@ The workflow in `.github/workflows/validate.yml` runs on every push and pull req
 
 ---
 
-*Built as part of a QA Engineering portfolio. Contact: faiz@mohara.co*
+*Built as part of a QA Engineering portfolio. Contact: eezydoes@hotmail.com*
