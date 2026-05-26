@@ -51,7 +51,7 @@ qa-dashboard-project/
 ## Dashboard Features
 
 ### Summary Cards
-Five at-a-glance cards: **Total**, **Passed**, **Failed**, **Skipped**, and **Pass Rate**. Each card uses a colour accent that matches its semantic meaning (green = pass, red = fail, orange = skip).
+Five cards: **Total**, **Passed**, **Failed**, **Skipped**, and **Pass Rate**. Each card uses a colour accent that matches its semantic meaning (green = pass, red = fail, orange = skip).
 
 ### Pass Rate Progress Bar
 A colour-coded bar showing the overall pass rate. The bar turns red when the pass rate drops below 70%, signalling a release risk.
